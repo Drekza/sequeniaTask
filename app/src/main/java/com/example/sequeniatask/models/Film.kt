@@ -1,6 +1,9 @@
 package com.example.sequeniatask.models
 
-data class Movie(
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
+data class Film(
     val description: String,
     val genres: List<String>,
     val id: Int,
@@ -9,4 +12,4 @@ data class Movie(
     val name: String,
     val rating: Double,
     val year: Int
-)
+) : Serializable

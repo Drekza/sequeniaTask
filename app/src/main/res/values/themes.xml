@@ -13,4 +13,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="background">@drawable/genre_btn_selector</item>
+        <item name="colorAccent">@color/genre_btn_not_focused</item>
+        <item name="color">@color/genre_btn_not_focused</item>
+    </style>
 </resources>

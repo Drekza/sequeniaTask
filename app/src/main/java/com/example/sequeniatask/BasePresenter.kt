@@ -1,5 +1,8 @@
 package com.example.sequeniatask
 
-interface BasePresenter {
+import android.view.View
+
+interface BasePresenter<in T> {
+    fun attach(view: T)
     fun onDestroy()
 }

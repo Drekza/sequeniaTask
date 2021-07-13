@@ -10,4 +10,5 @@
 
     <color name="genre_btn_not_focused">#323232</color>
     <color name="genre_btn_focused">#85b1d6</color>
+    <color name="background">#121212</color>
 </resources>

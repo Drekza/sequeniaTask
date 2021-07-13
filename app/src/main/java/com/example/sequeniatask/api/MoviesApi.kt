@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface MoviesApi {
 
-    @GET("")
+    @GET("sequeniatesttask/films.json")
     suspend fun getMoviesList(): Response<MoviesResponse>
 }

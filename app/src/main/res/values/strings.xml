@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SequeniaTask</string>
+    <string name="year">Год</string>
+    <string name="rating">Рейтинг</string>
 </resources>

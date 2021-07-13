@@ -1,41 +1,69 @@
 package com.example.sequeniatask.screens.fragments.allmoviesfragment
 
+import com.example.sequeniatask.models.Genre
+import com.example.sequeniatask.models.Film
 import com.example.sequeniatask.models.MoviesResponse
+import com.example.sequeniatask.models.Subtitle
 import com.example.sequeniatask.repository.MoviesRepository
-import com.example.sequeniatask.utils.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-class AllMoviesPresenter (private val view: AllMoviesContract.View,
-private val moviesRepository: MoviesRepository) : AllMoviesContract.Presenter {
+class AllMoviesPresenter (private var view: AllMoviesContract.View?) : AllMoviesContract.Presenter {
 
 
     init{
-        this.view.setPresenter(this)
+        this.view?.setPresenter(this)
     }
 
 
     override fun loadMovieList(){
+        val moviesRepository = MoviesRepository()
+
         CoroutineScope(Dispatchers.IO).launch {
-            val response = moviesRepository.getMovieList()
-
-            view.displayMovieList(handlingMovieListResponse(response))
-
+            val response = moviesRepository.getMoviesList()
+            if (response.isSuccessful){
+                response.body()?.let { resultResponse ->
+                    val list = resultResponse.films
+                    withContext(Dispatchers.Main){
+                        view?.displayMovieList(makeRecyclerViewList(list))
+                    }
+                }
+            }
         }
     }
 
-    private fun handlingMovieListResponse(response: Response<MoviesResponse>): Resource<MoviesResponse>{
-        if(response.isSuccessful){
-            response.body()?.let{ resultResponse ->
-                return Resource.Success(resultResponse)
+
+
+    fun makeRecyclerViewList(list: List<Film>): MutableList<Any>{
+        val recyclerViewList = mutableListOf<Any>()
+        recyclerViewList.add(Subtitle("Жанры"))
+        list.forEach{ movie -> // adding genres
+            val genres = movie.genres
+            genres.forEach{
+                val genre = Genre(it, false)
+                if(genre !in recyclerViewList){
+                    recyclerViewList.add(genre)
+                }
             }
         }
-        return Resource.Error(response.message())
+        recyclerViewList.add(Subtitle("Фильмы"))
+        list.forEach{ movie -> // adding movies
+            recyclerViewList.add(movie)
+        }
+
+        return recyclerViewList
+    }
+
+    override fun attach(view: AllMoviesFragment) {
+        this.view = view
     }
 
     override fun onDestroy() {
-        TODO("Not yet implemented")
+        this.view = null
     }
+
+
 }
