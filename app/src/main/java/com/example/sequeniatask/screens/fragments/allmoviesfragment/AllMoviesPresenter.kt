@@ -38,9 +38,10 @@ class AllMoviesPresenter (private var view: AllMoviesContract.View?) : AllMovies
 
 
     fun makeRecyclerViewList(list: List<Film>): MutableList<Any>{
+        val sortedList = list.sortedBy { it.localized_name }
         val recyclerViewList = mutableListOf<Any>()
         recyclerViewList.add(Subtitle("Жанры"))
-        list.forEach{ movie -> // adding genres
+        sortedList.forEach{ movie -> // adding genres
             val genres = movie.genres
             genres.forEach{
                 val genre = Genre(it, false)
@@ -50,7 +51,7 @@ class AllMoviesPresenter (private var view: AllMoviesContract.View?) : AllMovies
             }
         }
         recyclerViewList.add(Subtitle("Фильмы"))
-        list.forEach{ movie -> // adding movies
+        sortedList.forEach{ movie -> // adding movies
             recyclerViewList.add(movie)
         }
 
