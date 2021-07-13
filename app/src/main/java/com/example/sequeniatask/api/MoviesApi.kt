@@ -1,6 +1,6 @@
 package com.example.sequeniatask.api
 
-import com.example.sequeniatask.model.MoviesResponse
+import com.example.sequeniatask.models.MoviesResponse
 import retrofit2.Response
 import retrofit2.http.GET
 

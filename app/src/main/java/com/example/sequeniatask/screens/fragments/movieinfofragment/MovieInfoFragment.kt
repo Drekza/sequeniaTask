@@ -1,4 +1,4 @@
-package com.example.sequeniatask.screens.fragments
+package com.example.sequeniatask.screens.fragments.movieinfofragment
 
 import androidx.fragment.app.Fragment
 import com.example.sequeniatask.R

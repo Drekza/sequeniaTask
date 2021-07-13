@@ -1,4 +1,4 @@
-package com.example.sequeniatask.model
+package com.example.sequeniatask.models
 
 data class Movie(
     val description: String,
