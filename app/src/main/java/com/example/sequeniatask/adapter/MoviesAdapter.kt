@@ -25,6 +25,7 @@ import org.w3c.dom.Text
 class MoviesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var list: MutableList<Any>? = null
+    var listWithAllFilms: List<Any>? = null
 
 
     private inner class GenreViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -86,6 +87,12 @@ class MoviesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     genreBtn.text = genre.genre
                     genreBtn.isChecked = genre.isSelected
                     genreBtn.setOnClickListener {
+                        if(listWithAllFilms == null){
+                            listWithAllFilms = list?.toList()
+                        } else {
+                            list = listWithAllFilms!!.toMutableList()
+                            notifyDataSetChanged()
+                        }
 
                         genre.isSelected = true
 

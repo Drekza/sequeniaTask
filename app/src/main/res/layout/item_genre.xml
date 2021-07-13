@@ -12,6 +12,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:textAllCaps="true"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:focusable="true"
         android:clickable="true"
         android:button="@drawable/genre_btn_focused"
